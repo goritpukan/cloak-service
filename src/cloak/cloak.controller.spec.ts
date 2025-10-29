@@ -34,7 +34,7 @@ describe('CloakController', () => {
         .mockResolvedValue(CheckResultEnum.NOT_BOT);
 
       const result = await cloakController.check(request);
-      expect(result).toBe('not bot');
+      expect(result).toBe(CheckResultEnum.NOT_BOT);
     });
   });
 });
