@@ -1,7 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { CloakService } from './cloak.service';
 import { RequestDto } from './dto/request.dto';
-import { CheckResult, CheckResultEnum } from './types/check-result.type';
+import { CheckResultEnum } from './types/check-result.type';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Cloak Service')
@@ -9,6 +9,7 @@ import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class CloakController {
   constructor(private readonly cloakService: CloakService) {}
   @Post('check')
+  @HttpCode(200)
   @ApiOperation({ summary: 'Check if a request is from a bot or not' })
   @ApiBody({
     type: RequestDto,
@@ -19,11 +20,11 @@ export class CloakController {
     description: 'Returns "bot" or "not bot"',
     schema: {
       type: 'string',
-      enum: [...CheckResultEnum],
+      enum: Object.values(CheckResultEnum),
       example: 'bot',
     },
   })
-  async check(@Body() body: RequestDto): Promise<CheckResult> {
+  async check(@Body() body: RequestDto): Promise<CheckResultEnum> {
     return await this.cloakService.check(body);
   }
 }

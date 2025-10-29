@@ -3,6 +3,7 @@ import { getModelToken } from '@nestjs/mongoose';
 import { CloakService } from './cloak.service';
 import { Log } from './schemas/log.schema';
 import { RequestDto } from './dto/request.dto';
+import { CheckResultEnum } from './types/check-result.type';
 
 describe('CloakService', () => {
   let service: CloakService;
@@ -50,7 +51,7 @@ describe('CloakService', () => {
   describe('check', () => {
     it('should return "bot" when headers are missing', async () => {
       const result = await service.check({ ...mockRequest, userAgent: '' });
-      expect(result).toBe('bot');
+      expect(result).toBe(CheckResultEnum.BOT);
     });
 
     it('should return "bot" for bot user agents', async () => {
@@ -58,19 +59,19 @@ describe('CloakService', () => {
         ...mockRequest,
         userAgent: 'Googlebot/2.1',
       });
-      expect(result).toBe('bot');
+      expect(result).toBe(CheckResultEnum.BOT);
     });
 
     it('should return "bot" when rate limit exceeded', async () => {
       mockLogModel.countDocuments.mockResolvedValue(101);
       const result = await service.check(mockRequest);
-      expect(result).toBe('bot');
+      expect(result).toBe(CheckResultEnum.BOT);
     });
 
     it('should return "not bot" for valid requests', async () => {
       mockLogModel.countDocuments.mockResolvedValue(10);
       const result = await service.check(mockRequest);
-      expect(result).toBe('not bot');
+      expect(result).toBe(CheckResultEnum.NOT_BOT);
     });
 
     it('should create logs for all requests', async () => {

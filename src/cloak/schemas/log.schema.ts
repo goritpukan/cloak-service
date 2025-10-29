@@ -14,8 +14,8 @@ export class Log {
   @Prop({ required: false })
   acceptLanguage?: string;
 
-  @Prop({ required: true, enum: CheckResultEnum, type: String })
-  checkResult: string;
+  @Prop({ required: true, enum: Object.values(CheckResultEnum), type: String })
+  checkResult: CheckResultEnum;
 }
 
 export const LogSchema = SchemaFactory.createForClass(Log);
