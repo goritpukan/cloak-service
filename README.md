@@ -1,15 +1,11 @@
 # Cloak service
 
----
-
 ## Features
 - Detects bots based on user-agent analysis
 - Logs and rate-limits requests using MongoDB
 - Detailed Swagger documentation
 - Pre-commit checks with Husky (lint + tests)
 - Fully Dockerized setup
-
----
 
 ## Description
 
@@ -27,13 +23,10 @@ The project comes with full Swagger documentation for the endpoint and DTO.
 
 You can also run it using Docker Compose, so there’s no need to install dependencies locally or run MongoDB manually - everything is ready to go with one command.
 
----
-
 ## Swagger
 
 Swagger url: [http://localhost:3000/swagger](http://localhost:3000/swagger)
 
----
 ## Setup
 
 First of all you need to clone repo
@@ -41,6 +34,9 @@ First of all you need to clone repo
 `git clone https://github.com/goritpukan/cloak-service.git`
 
 And then you can run it using docker or locally
+
+---
+
 ### Docker
 
 **Docker and docker compose should be installed on your machine**
@@ -70,10 +66,7 @@ Then
 
 `npm run start` to start project
 
----
 ## Stack
-
----
 
 - NestJS (backend)
 - Mongodb (database)
