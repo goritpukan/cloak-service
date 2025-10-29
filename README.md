@@ -41,7 +41,9 @@ And then you can run it using docker or locally
 
 **Docker and docker compose should be installed on your machine**
 
-`sudo docker compose up --build -d`
+`sudo docker compose up --build -d` for linux
+
+`docker compose up --build -d` for macOS
 
 ---
 ### Locally
