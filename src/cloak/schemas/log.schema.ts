@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import type { CheckResult } from '../types/check-result.type';
 import { CheckResultEnum } from '../types/check-result.type';
 
 export type LogDocument = HydratedDocument<Log>;
@@ -15,8 +14,8 @@ export class Log {
   @Prop({ required: false })
   acceptLanguage?: string;
 
-  @Prop({ required: true, enum: CheckResultEnum })
-  checkResult: CheckResult;
+  @Prop({ required: true, enum: CheckResultEnum, type: String })
+  checkResult: string;
 }
 
 export const LogSchema = SchemaFactory.createForClass(Log);
